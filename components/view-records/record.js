@@ -3,6 +3,15 @@ import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 const Record = ({ record }) => {
   const date = new Date(record.dateCreated).toDateString();
   const names = ["junhui", "chimin", "vinson"];
+  const getColor = (value) => {
+    if (value > 0) return "secondary";
+    if (value < 0) return "error";
+    return "text.primary";
+  };
+  const formatValue = (value) => {
+    if (value >= 0) return `$${value}`;
+    if (value < 0) return `-$${value}`;
+  };
   return (
     <Grid item xs={12} my={3}>
       <Card>
@@ -21,10 +30,8 @@ const Record = ({ record }) => {
                 <Typography sx={{ fontWeight: 600 }}>
                   {name.toUpperCase()}:
                 </Typography>
-                <Typography color={record[name] > 0 ? "secondary" : "error"}>
-                  {record[name] > 0
-                    ? `$${record[name]}`
-                    : `-$${Math.abs(record[name])}`}
+                <Typography color={getColor(record[name])}>
+                  {formatValue(record[name])}
                 </Typography>
               </Box>
             ))}
