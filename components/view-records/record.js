@@ -2,7 +2,7 @@ import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
 
 const Record = ({ record }) => {
   const date = new Date(record.dateCreated).toDateString();
-  const names = ["vinson", "junhui", "chimin"];
+  const names = ["junhui", "chimin", "vinson"];
   return (
     <Grid item xs={12} my={3}>
       <Card>

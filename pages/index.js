@@ -36,7 +36,6 @@ export default function Home() {
   }, [loading]);
 
   const profiles = [
-    { name: "Vinson", picture: "vinson.jpg", result: tabulatedResults?.vinson },
     {
       name: "Jun Hui",
       picture: "junhui.jpg",
@@ -47,6 +46,7 @@ export default function Home() {
       picture: "chimin.jpg",
       result: tabulatedResults?.chimin,
     },
+    { name: "Vinson", picture: "vinson.jpg", result: tabulatedResults?.vinson },
   ];
 
   const context = { setLoading };
