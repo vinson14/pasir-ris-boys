@@ -63,7 +63,7 @@ export default function Home() {
         <MetaDataHead />
         {(loading || !tabulatedResults) && <CircularProgress />}
         {!loading && tabulatedResults && (
-          <Container sx={{ p: 3, height: "100%" }}>
+          <Container sx={{ py: 3, height: "100%" }}>
             <Grid container>
               {profiles.map((profile) => (
                 <ProfileCard key={profile.name} {...profile} />

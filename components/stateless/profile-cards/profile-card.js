@@ -19,7 +19,7 @@ const ProfileCard = ({ name, picture, result }) => {
             <Box display="flex" justifyContent="center" alignItems="center">
               <Avatar alt={name} src={picture} sx={avatarSx} />
               <Box ml={3}>
-                <Typography variant="h5" sx={{ fontWeight: 600 }} align="right">
+                <Typography variant="h6" sx={{ fontWeight: 600 }} align="right">
                   {name.toUpperCase()}
                 </Typography>
                 <Typography align="right">
