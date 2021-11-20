@@ -10,7 +10,7 @@ const Record = ({ record }) => {
   };
   const formatValue = (value) => {
     if (value >= 0) return `$${value}`;
-    if (value < 0) return `-$${value}`;
+    if (value < 0) return `-$${Math.abs(value)}`;
   };
   return (
     <Grid item xs={12} my={3}>
