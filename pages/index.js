@@ -1,10 +1,10 @@
 import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import AddRecordForm from "../components/stateless/add-record/add-record-form";
+import AddRecordForm from "../components/add-record/add-record-form";
 import MetaDataHead from "../components/stateless/misc/meta-data-head";
 import ProfileCard from "../components/stateless/profile-cards/profile-card";
-import MainContext from "../context/main-context";
+import mainContext from "../context/main-context";
 import { getTabulatedResults } from "../utils/api";
 import useModal from "../utils/useModal";
 
@@ -13,8 +13,10 @@ export default function Home() {
   const [modalState, openModal, closeModal] = useModal();
   const [loading, setLoading] = useState(false);
   useEffect(() => {
-    getTabulatedResults().then((results) => setTabulatedResults(results));
-    setLoading(false);
+    getTabulatedResults()
+      .then((results) => setTabulatedResults(results))
+      .then(() => setLoading(false));
+    console.log("useEffect fetch results ran");
   }, [loading]);
 
   const profiles = [
@@ -34,7 +36,7 @@ export default function Home() {
   const context = { setLoading };
 
   return (
-    <MainContext.Provider value={context}>
+    <mainContext.Provider value={context}>
       <div>
         <MetaDataHead />
         <Container>
@@ -51,6 +53,6 @@ export default function Home() {
           <AddRecordForm open={modalState} onClose={closeModal} />
         </Container>
       </div>
-    </MainContext.Provider>
+    </mainContext.Provider>
   );
 }

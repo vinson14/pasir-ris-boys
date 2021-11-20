@@ -1,11 +1,20 @@
 import ModalContainer from "./modal-container";
 import { Box, Button, Grid, TextField, Typography } from "@mui/material";
-import useRecord from "../../../utils/useRecord";
+import useRecord from "../../utils/useRecord";
+import { useContext, useState } from "react";
+import mainContext from "../../context/main-context";
 
 const AddRecordForm = ({ open, onClose }) => {
   const names = ["vin", "jun", "chim"];
   const labels = { vin: "Vinson", jun: "Jun Hui", chim: "Chi Min" };
-  const [record, onChange, onSubmit] = useRecord();
+  const [error, setError] = useState(false);
+  const { setLoading } = useContext(mainContext);
+  const [record, onChange, handleSubmit] = useRecord(setLoading);
+  const onSubmit = (event) => {
+    const submitStatus = handleSubmit(event);
+    if (submitStatus) onClose();
+    else setError(true);
+  };
 
   return (
     <ModalContainer open={open} onClose={onClose} title="Add Record">
@@ -30,6 +39,18 @@ const AddRecordForm = ({ open, onClose }) => {
               />
             </Grid>
           ))}
+          {error && (
+            <Grid item xs={12} pb={3}>
+              <Typography
+                component="div"
+                variant="caption"
+                color="error"
+                align="center"
+              >
+                Values do not add up to zero
+              </Typography>
+            </Grid>
+          )}
           <Grid item xs={12} display="flex" justifyContent="center">
             <Button variant="contained" type="submit">
               Add
