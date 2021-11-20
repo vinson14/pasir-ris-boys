@@ -1,8 +1,24 @@
 import API from "@aws-amplify/api";
 import Amplify from "@aws-amplify/core";
-import awsConfig from "../src/aws-exports";
+const awsmobile = {
+  aws_project_region: "us-east-1",
+  aws_dynamodb_all_tables_region: "us-east-1",
+  aws_dynamodb_table_schemas: [
+    {
+      tableName: "pasirrisboysrecords-dev",
+      region: "us-east-1",
+    },
+  ],
+  aws_cloud_logic_custom: [
+    {
+      name: "pasirrisboysapi",
+      endpoint: "https://e9ic0h44o6.execute-api.us-east-1.amazonaws.com/dev",
+      region: "us-east-1",
+    },
+  ],
+};
 
-Amplify.configure(awsConfig);
+Amplify.configure(awsmobile);
 const apiName = "pasirrisboysapi";
 const path = "/records";
 
