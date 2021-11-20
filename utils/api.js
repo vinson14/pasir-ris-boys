@@ -34,6 +34,7 @@ export const getTabulatedResults = async () => {
     tabulatedResult.junhui += record.junhui;
     tabulatedResult.chimin += record.chimin;
   });
+  records.sort((a, b) => b.dateCreated - a.dateCreated);
   console.log(records);
   console.log(tabulatedResult);
   return [records, tabulatedResult];
