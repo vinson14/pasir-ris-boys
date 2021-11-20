@@ -1,4 +1,11 @@
-import { Box, Button, Container, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  Grid,
+  Typography,
+} from "@mui/material";
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import AddRecordForm from "../components/add-record/add-record-form";
@@ -9,7 +16,7 @@ import { getTabulatedResults } from "../utils/api";
 import useModal from "../utils/useModal";
 
 export default function Home() {
-  const [tabulatedResults, setTabulatedResults] = useState({});
+  const [tabulatedResults, setTabulatedResults] = useState();
   const [modalState, openModal, closeModal] = useModal();
   const [loading, setLoading] = useState(true);
   useEffect(() => {
@@ -37,21 +44,30 @@ export default function Home() {
 
   return (
     <mainContext.Provider value={context}>
-      <Box bgcolor="grey.100" minHeight="100vh">
+      <Box
+        bgcolor="grey.100"
+        minHeight="100vh"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+      >
         <MetaDataHead />
-        <Container sx={{ p: 3 }}>
-          <Grid container>
-            {profiles.map((profile) => (
-              <ProfileCard key={profile.name} {...profile} />
-            ))}
-          </Grid>
-          <Box display="flex" justifyContent="center">
-            <Button variant="contained" onClick={openModal}>
-              Add Record
-            </Button>
-          </Box>
-          <AddRecordForm open={modalState} onClose={closeModal} />
-        </Container>
+        {(loading || !tabulatedResults) && <CircularProgress />}
+        {!loading && tabulatedResults && (
+          <Container sx={{ p: 3 }}>
+            <Grid container>
+              {profiles.map((profile) => (
+                <ProfileCard key={profile.name} {...profile} />
+              ))}
+            </Grid>
+            <Box display="flex" justifyContent="center">
+              <Button variant="contained" onClick={openModal}>
+                Add Record
+              </Button>
+            </Box>
+            <AddRecordForm open={modalState} onClose={closeModal} />
+          </Container>
+        )}
       </Box>
     </mainContext.Provider>
   );
