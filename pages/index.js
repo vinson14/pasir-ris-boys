@@ -65,8 +65,8 @@ export default function Home() {
         {!loading && tabulatedResults && (
           <Container sx={{ py: 3, height: "100%" }}>
             <Grid container>
-              {profiles.map((profile) => (
-                <ProfileCard key={profile.name} {...profile} />
+              {profiles.map((profile, index) => (
+                <ProfileCard key={profile.name} index={index} {...profile} />
               ))}
             </Grid>
             <Box display="flex" justifyContent="center">

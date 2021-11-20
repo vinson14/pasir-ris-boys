@@ -7,12 +7,18 @@ import {
   Typography,
 } from "@mui/material";
 import CustomTransition from "../misc/custom-transition";
+import { useEffect, useState } from "react";
 
-const ProfileCard = ({ name, picture, result }) => {
+const ProfileCard = ({ name, picture, result, index }) => {
   const avatarHeight = 125;
   const avatarSx = { height: avatarHeight, width: avatarHeight };
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setShow(true), index * 200);
+    return () => clearTimeout(timer);
+  }, [index]);
   return (
-    <CustomTransition show>
+    <CustomTransition show={show}>
       <Grid item xs={12} lg={4} p={3}>
         <Card>
           <CardContent>
