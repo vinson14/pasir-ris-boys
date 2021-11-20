@@ -2,20 +2,20 @@ import { useState } from "react";
 import { submitRecord } from "./api";
 
 const useRecord = (setLoading) => {
-  const [vin, setVin] = useState("");
-  const [jun, setJun] = useState("");
-  const [chim, setChim] = useState("");
-  const record = { vin, jun, chim };
+  const [vinson, setVinson] = useState("");
+  const [junhui, setJunhui] = useState("");
+  const [chimin, setChimin] = useState("");
+  const record = { vinson, junhui, chimin };
   const onChangeMap = {
-    vin: setVin,
-    jun: setJun,
-    chim: setChim,
+    vinson: setVinson,
+    junhui: setJunhui,
+    chimin: setChimin,
   };
 
   const resetValues = () => {
-    setVin("");
-    setJun("");
-    setChim("");
+    setVinson("");
+    setJunhui("");
+    setChimin("");
   };
 
   const onChange = (event, name) => {

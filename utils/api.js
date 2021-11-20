@@ -10,14 +10,17 @@ export const getTabulatedResults = async () => {
   const init = {
     headers: {},
   };
-  const response = await API.get(apiName, path, init);
-  console.log(response);
-
-  return {
-    vinson: 1000,
-    junhui: -500,
-    chimin: -500,
-  };
+  const records = await API.get(apiName, path, init);
+  console.log(records);
+  const tabulatedResult = { vinson: 0, junhui: 0, chimin: 0 };
+  records.forEach((record) => {
+    tabulatedResult.vinson += record.vinson;
+    tabulatedResult.junhui += record.junhui;
+    tabulatedResult.chimin += record.chimin;
+  });
+  console.log(records);
+  console.log(tabulatedResult);
+  return tabulatedResult;
 };
 
 export const submitRecord = async (record) => {

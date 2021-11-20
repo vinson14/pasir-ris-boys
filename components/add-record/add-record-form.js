@@ -5,8 +5,8 @@ import { useContext, useState } from "react";
 import mainContext from "../../context/main-context";
 
 const AddRecordForm = ({ open, onClose }) => {
-  const names = ["vin", "jun", "chim"];
-  const labels = { vin: "Vinson", jun: "Jun Hui", chim: "Chi Min" };
+  const names = ["vinson", "junhui", "chimin"];
+  const labels = { vinson: "Vinson", junhui: "Jun Hui", chimin: "Chi Min" };
   const [error, setError] = useState(false);
   const { setLoading } = useContext(mainContext);
   const [record, onChange, handleSubmit] = useRecord(setLoading);

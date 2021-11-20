@@ -11,7 +11,7 @@ import useModal from "../utils/useModal";
 export default function Home() {
   const [tabulatedResults, setTabulatedResults] = useState({});
   const [modalState, openModal, closeModal] = useModal();
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     getTabulatedResults()
       .then((results) => setTabulatedResults(results))
