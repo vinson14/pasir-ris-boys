@@ -10,8 +10,8 @@ const AddRecordForm = ({ open, onClose }) => {
   const [error, setError] = useState(false);
   const { setLoading } = useContext(mainContext);
   const [record, onChange, handleSubmit] = useRecord(setLoading);
-  const onSubmit = (event) => {
-    const submitStatus = handleSubmit(event);
+  const onSubmit = async (event) => {
+    const submitStatus = await handleSubmit(event);
     if (submitStatus) onClose();
     else setError(true);
   };

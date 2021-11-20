@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { submitRecord } from "./api";
 
 const useRecord = (setLoading) => {
   const [vin, setVin] = useState("");
@@ -30,24 +31,28 @@ const useRecord = (setLoading) => {
     });
   };
 
-  const onSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     parseValues();
     if (!validateRecord()) {
       console.log("Values do not tabulate");
       return false;
     }
-    console.log(record);
-    resetValues();
-    setLoading(true);
-    return true;
+    const response = await submitRecord(record);
+    if (response) {
+      resetValues();
+      setLoading(true);
+      return true;
+    } else {
+      return false;
+    }
   };
 
   const validateRecord = () => {
     return Object.values(record).reduce((a, b) => a + b, 0) === 0;
   };
 
-  return [record, onChange, onSubmit];
+  return [record, onChange, handleSubmit];
 };
 
 export default useRecord;

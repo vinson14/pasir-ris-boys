@@ -1,0 +1,35 @@
+{
+  "paths": [
+    {
+      "name": "/records",
+      "lambdaFunction": "pasirrisboyslambda",
+      "privacy": {
+        "open": true
+      },
+      "policyResourceName": "/records"
+    }
+  ],
+  "resourceName": "pasirrisboysapi",
+  "apiName": "pasirrisboysapi",
+  "functionArns": [
+    {
+      "lambdaFunction": "pasirrisboyslambda"
+    }
+  ],
+  "privacy": {
+    "auth": 0,
+    "unauth": 0,
+    "authRoleName": "amplify-pasirrisboys-dev-231129-authRole",
+    "unAuthRoleName": "amplify-pasirrisboys-dev-231129-unauthRole"
+  },
+  "dependsOn": [
+    {
+      "category": "function",
+      "resourceName": "pasirrisboyslambda",
+      "attributes": [
+        "Name",
+        "Arn"
+      ]
+    }
+  ]
+}

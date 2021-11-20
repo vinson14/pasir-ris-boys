@@ -1,0 +1,10 @@
+{
+  "resourceName": "pasirrisboysrecords",
+  "tableName": "pasirrisboysrecords",
+  "partitionKey": {
+    "fieldName": "dateCreated",
+    "fieldType": "number"
+  },
+  "gsi": [],
+  "triggerFunctions": []
+}

@@ -1,0 +1,23 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-pasirrisboys-dev-231129-authRole",
+      "UnauthRoleArn": "arn:aws:iam::066354352598:role/amplify-pasirrisboys-dev-231129-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::066354352598:role/amplify-pasirrisboys-dev-231129-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-pasirrisboys-dev-231129-deployment",
+      "UnauthRoleName": "amplify-pasirrisboys-dev-231129-unauthRole",
+      "StackName": "amplify-pasirrisboys-dev-231129",
+      "StackId": "arn:aws:cloudformation:us-east-1:066354352598:stack/amplify-pasirrisboys-dev-231129/26103340-4a14-11ec-b1f4-0e5be016256f",
+      "AmplifyAppId": "dnvdmdc4v9lhr"
+    },
+    "categories": {
+      "function": {
+        "pasirrisboyslambda": {
+          "deploymentBucketName": "amplify-pasirrisboys-dev-231129-deployment",
+          "s3Key": "amplify-builds/pasirrisboyslambda-4e5165554d334372346f-build.zip"
+        }
+      }
+    }
+  }
+}
