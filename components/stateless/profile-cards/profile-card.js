@@ -8,22 +8,21 @@ import {
 } from "@mui/material";
 
 const ProfileCard = ({ name, picture, result }) => {
-  const avatarHeight = 100;
+  const avatarHeight = 125;
   const avatarSx = { height: avatarHeight, width: avatarHeight };
   return (
     <Grid item xs={12} lg={4} p={3}>
       <Card>
         <CardContent>
-          <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            flexDirection="column"
-          >
+          <Box display="flex" justifyContent="center" alignItems="center">
             <Avatar alt={name} src={picture} sx={avatarSx} />
-            <Box p={3}>
-              <Typography align="center">${result}</Typography>
-              <Typography align="center">{name}</Typography>
+            <Box ml={3}>
+              <Typography variant="h5" sx={{ fontWeight: 600 }} align="right">
+                {name.toUpperCase()}
+              </Typography>
+              <Typography align="right">
+                {result < 0 ? `-$${Math.abs(result)}` : `$${result}`}
+              </Typography>
             </Box>
           </Box>
         </CardContent>

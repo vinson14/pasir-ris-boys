@@ -37,9 +37,9 @@ export default function Home() {
 
   return (
     <mainContext.Provider value={context}>
-      <div>
+      <Box bgcolor="grey.100" minHeight="100vh">
         <MetaDataHead />
-        <Container>
+        <Container sx={{ p: 3 }}>
           <Grid container>
             {profiles.map((profile) => (
               <ProfileCard key={profile.name} {...profile} />
@@ -52,7 +52,7 @@ export default function Home() {
           </Box>
           <AddRecordForm open={modalState} onClose={closeModal} />
         </Container>
-      </div>
+      </Box>
     </mainContext.Provider>
   );
 }
