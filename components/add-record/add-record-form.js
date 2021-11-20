@@ -36,6 +36,7 @@ const AddRecordForm = ({ open, onClose }) => {
                 type="number"
                 onChange={(event) => onChange(event, name)}
                 InputLabelProps={{ shrink: true }}
+                startAdornment={<InputAdornment position="start">$</InputAdornment>} 
               />
             </Grid>
           ))}
