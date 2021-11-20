@@ -4,6 +4,12 @@ const theme = createTheme({
   typography: {
     fontFamily: "Quicksand, sans-serif",
   },
+  palette: {
+    secondary: {
+      main: "#00c853",
+      contrastText: "#fff",
+    },
+  },
   shape: {
     borderRadius: 4,
   },

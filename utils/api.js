@@ -36,7 +36,7 @@ export const getTabulatedResults = async () => {
   });
   console.log(records);
   console.log(tabulatedResult);
-  return tabulatedResult;
+  return [records, tabulatedResult];
 };
 
 export const submitRecord = async (record) => {
