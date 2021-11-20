@@ -1,10 +1,10 @@
-import { Slide } from "@mui/material";
+import { Grow, Slide } from "@mui/material";
 
 const CustomTransition = ({ children, show }) => {
   return (
-    <Slide direction="left" timeout={1000} in={show}>
+    <Grow direction="left" timeout={1000} in={show}>
       {children}
-    </Slide>
+    </Grow>
   );
 };
 

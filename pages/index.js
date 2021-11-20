@@ -46,15 +46,15 @@ export default function Home() {
     <mainContext.Provider value={context}>
       <Box
         bgcolor="grey.100"
-        minHeight="100vh"
         display="flex"
+        minHeight="100vh"
         alignItems="center"
         justifyContent="center"
       >
         <MetaDataHead />
         {(loading || !tabulatedResults) && <CircularProgress />}
         {!loading && tabulatedResults && (
-          <Container sx={{ p: 3 }}>
+          <Container sx={{ p: 3, height: "100%" }}>
             <Grid container>
               {profiles.map((profile) => (
                 <ProfileCard key={profile.name} {...profile} />
