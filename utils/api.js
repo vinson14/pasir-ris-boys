@@ -27,7 +27,6 @@ export const getTabulatedResults = async () => {
     headers: {},
   };
   const records = await API.get(apiName, path, init);
-  console.log(records);
   const tabulatedResult = { vinson: 0, junhui: 0, chimin: 0 };
   records.forEach((record) => {
     tabulatedResult.vinson += record.vinson;
@@ -35,8 +34,6 @@ export const getTabulatedResults = async () => {
     tabulatedResult.chimin += record.chimin;
   });
   records.sort((a, b) => b.dateCreated - a.dateCreated);
-  console.log(records);
-  console.log(tabulatedResult);
   return [records, tabulatedResult];
 };
 

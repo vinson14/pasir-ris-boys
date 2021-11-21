@@ -9,7 +9,8 @@ import {
 import CustomTransition from "../misc/custom-transition";
 import { useEffect, useState } from "react";
 
-const ProfileCard = ({ name, picture, result, index }) => {
+const ProfileCard = ({ name, picture, results, resultKey, index }) => {
+  const result = results[resultKey];
   const avatarHeight = 125;
   const avatarSx = { height: avatarHeight, width: avatarHeight };
   const [show, setShow] = useState(false);
@@ -19,23 +20,25 @@ const ProfileCard = ({ name, picture, result, index }) => {
   }, [index]);
   return (
     <CustomTransition show={show}>
-      <Grid item xs={12} lg={4} p={3}>
-        <Card>
-          <CardContent>
-            <Box display="flex" justifyContent="center" alignItems="center">
-              <Avatar alt={name} src={picture} sx={avatarSx} />
-              <Box ml={3}>
-                <Typography variant="h6" sx={{ fontWeight: 600 }} align="right">
-                  {name.toUpperCase()}
-                </Typography>
-                <Typography align="right">
-                  {result < 0 ? `-$${Math.abs(result)}` : `$${result}`}
-                </Typography>
-              </Box>
+      <Card>
+        <CardContent>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+          >
+            <Avatar alt={name} src={picture} sx={avatarSx} />
+            <Box ml={3}>
+              <Typography variant="h6" sx={{ fontWeight: 600 }} align="right">
+                {name.toUpperCase()}
+              </Typography>
+              <Typography align="right">
+                {result < 0 ? `-$${Math.abs(result)}` : `$${result}`}
+              </Typography>
             </Box>
-          </CardContent>
-        </Card>
-      </Grid>
+          </Box>
+        </CardContent>
+      </Card>
     </CustomTransition>
   );
 };
