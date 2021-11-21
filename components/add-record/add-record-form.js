@@ -2,7 +2,7 @@ import ModalContainer from "../stateless/misc/modal-container";
 // import LoadingButton from "@mui/lab/LoadingButton";
 import {
   Box,
-  Button, 
+  Button,
   CircularProgress,
   Grid,
   InputAdornment,
@@ -12,6 +12,7 @@ import {
 import useRecord from "../../utils/useRecord";
 import { useContext, useState } from "react";
 import mainContext from "../../context/main-context";
+import { LoadingButton } from "@mui/lab";
 
 const AddRecordForm = ({ open, onClose }) => {
   const names = ["vinson", "junhui", "chimin"];
@@ -23,9 +24,11 @@ const AddRecordForm = ({ open, onClose }) => {
   const onSubmit = async (event) => {
     setFormSubmittedLoading(true);
     const submitStatus = await handleSubmit(event);
-    setFormSubmittedLoading(false);
-    if (submitStatus) onClose();
-    else setError(true);
+    if (submitStatus) {
+      onClose();
+    } else {
+      setError(true);
+    }
   };
 
   return (
@@ -33,30 +36,30 @@ const AddRecordForm = ({ open, onClose }) => {
       <form onSubmit={onSubmit}>
         <Grid container>
           {names.map((name) => (
-              <Grid
-                item
-                xs={12}
-                md={4}
-                p={3}
-                key={name}
-                display="flex"
-                justifyContent="center"
-              >
-                <TextField
-                  label={labels[name]}
-                  value={record[name]}
-                  type="number"
-                  placeholder="1000"
-                  onChange={(event) => onChange(event, name)}
-                  InputLabelProps={{ shrink: true }}
-                  InputProps={{
-                    startAdornment: (
-                      <InputAdornment position="start">$</InputAdornment>
-                    ),
-                  }}
-                />
-              </Grid>
-            ))}
+            <Grid
+              item
+              xs={12}
+              md={4}
+              p={3}
+              key={name}
+              display="flex"
+              justifyContent="center"
+            >
+              <TextField
+                label={labels[name]}
+                value={record[name]}
+                type="number"
+                placeholder="1000"
+                onChange={(event) => onChange(event, name)}
+                InputLabelProps={{ shrink: true }}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">$</InputAdornment>
+                  ),
+                }}
+              />
+            </Grid>
+          ))}
           {error && (
             <Grid item xs={12} pb={3}>
               <Typography
@@ -69,11 +72,15 @@ const AddRecordForm = ({ open, onClose }) => {
               </Typography>
             </Grid>
           )}
-            <Grid item xs={12} display="flex" justifyContent="center">
-              <Button loading={formSubmittedLoading} variant="contained" type="submit">
-                Add
-              </Button>
-            </Grid>
+          <Grid item xs={12} display="flex" justifyContent="center">
+            <LoadingButton
+              loading={formSubmittedLoading}
+              variant="contained"
+              type="submit"
+            >
+              Add
+            </LoadingButton>
+          </Grid>
         </Grid>
       </form>
     </ModalContainer>
