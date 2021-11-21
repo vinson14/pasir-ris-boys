@@ -1,6 +1,18 @@
-import { Box, Card, CardContent, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Card,
+  CardContent,
+  Grid,
+  IconButton,
+  Typography,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import { deleteRecord } from "../../utils/api";
+import { useContext, useState } from "react";
+import mainContext from "../../context/main-context";
+import { LoadingButton } from "@mui/lab";
 
-const Record = ({ record }) => {
+const Record = ({ record, onClose }) => {
   const date = new Date(record.dateCreated).toDateString();
   const names = ["junhui", "chimin", "vinson"];
   const getColor = (value) => {
@@ -12,6 +24,18 @@ const Record = ({ record }) => {
     if (value >= 0) return `$${value}`;
     if (value < 0) return `-$${Math.abs(value)}`;
   };
+  const [deleteLoading, setDeleteLoading] = useState(false);
+  const { setLoading } = useContext(mainContext);
+  const handleDelete = () => {
+    setDeleteLoading(true);
+    deleteRecord(record)
+      .then((res) => {
+        if (res) setDeleteLoading(false);
+      })
+      .then(() => onClose())
+      .then(() => setLoading(true));
+  };
+
   return (
     <Grid item xs={12} my={3}>
       <Card>
@@ -35,6 +59,18 @@ const Record = ({ record }) => {
                 </Typography>
               </Box>
             ))}
+            <Box display="flex" p={2} justifyContent="center">
+              <LoadingButton
+                loading={deleteLoading}
+                loadingPosition="end"
+                color="error"
+                endIcon={<DeleteIcon />}
+                onClick={handleDelete}
+                variant="contained"
+              >
+                Delete
+              </LoadingButton>
+            </Box>
           </Box>
         </CardContent>
       </Card>

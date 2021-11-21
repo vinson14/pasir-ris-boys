@@ -5,7 +5,9 @@ const ProfileCardsContainer = ({ children }) => {
   return (
     <Container sx={{ py: 3, height: "100%" }}>
       <MetaDataHead />
-      <Grid container>{children}</Grid>
+      <Grid container spacing={2} justifyContent="center">
+        {children}
+      </Grid>
     </Container>
   );
 };

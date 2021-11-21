@@ -15,7 +15,7 @@
       "function": {
         "pasirrisboyslambda": {
           "deploymentBucketName": "amplify-pasirrisboys-dev-231129-deployment",
-          "s3Key": "amplify-builds/pasirrisboyslambda-4e5165554d334372346f-build.zip"
+          "s3Key": "amplify-builds/pasirrisboyslambda-514b646c356b4a586353-build.zip"
         }
       }
     }

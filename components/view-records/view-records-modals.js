@@ -7,7 +7,7 @@ const ViewRecordsModal = ({ open, onClose, records }) => {
     <ModalContainer open={open} onClose={onClose} title="Records">
       <Grid container>
         {records.map((record) => (
-          <Record record={record} key={record.dateCreated} />
+          <Record record={record} key={record.dateCreated} onClose={onClose} />
         ))}
       </Grid>
     </ModalContainer>

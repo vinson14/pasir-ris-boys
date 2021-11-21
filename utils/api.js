@@ -50,6 +50,22 @@ export const submitRecord = async (record) => {
   }
 };
 
+export const deleteRecord = async (record) => {
+  const init = {
+    headers: {},
+  };
+  try {
+    const response = await API.del(
+      apiName,
+      `${path}/${record.dateCreated}`,
+      init
+    );
+    return true;
+  } catch (err) {
+    return false;
+  }
+};
+
 // const oneTimeAdd = async () => {
 //   const records = [
 //     {
