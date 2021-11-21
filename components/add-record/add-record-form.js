@@ -1,7 +1,8 @@
 import ModalContainer from "../stateless/misc/modal-container";
-import LoadingButton from "@mui/lab/LoadingButton";
+// import LoadingButton from "@mui/lab/LoadingButton";
 import {
   Box,
+  Button, 
   CircularProgress,
   Grid,
   InputAdornment,
@@ -69,9 +70,9 @@ const AddRecordForm = ({ open, onClose }) => {
             </Grid>
           )}
             <Grid item xs={12} display="flex" justifyContent="center">
-              <LoadingButton loading={formSubmittedLoading} variant="contained" type="submit">
+              <Button loading={formSubmittedLoading} variant="contained" type="submit">
                 Add
-              </LoadingButton>
+              </Button>
             </Grid>
         </Grid>
       </form>
