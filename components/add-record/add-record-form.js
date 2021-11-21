@@ -1,7 +1,7 @@
 import ModalContainer from "../stateless/misc/modal-container";
 import {
   Box,
-  Button,
+  LoadingButton,
   CircularProgress,
   Grid,
   InputAdornment,
@@ -31,9 +31,7 @@ const AddRecordForm = ({ open, onClose }) => {
     <ModalContainer open={open} onClose={onClose} title="Add Record">
       <form onSubmit={onSubmit}>
         <Grid container>
-          {formSubmittedLoading && <CircularProgress />}
-          {!formSubmittedLoading &&
-            names.map((name) => (
+          {names.map((name) => (
               <Grid
                 item
                 xs={12}
@@ -58,7 +56,7 @@ const AddRecordForm = ({ open, onClose }) => {
                 />
               </Grid>
             ))}
-          {!formSubmittedLoading && error && (
+          {error && (
             <Grid item xs={12} pb={3}>
               <Typography
                 component="div"
@@ -70,13 +68,11 @@ const AddRecordForm = ({ open, onClose }) => {
               </Typography>
             </Grid>
           )}
-          {!formSubmittedLoading && (
             <Grid item xs={12} display="flex" justifyContent="center">
-              <Button variant="contained" type="submit">
+              <Loading Button loading={formSubmittedLoading} variant="contained" type="submit">
                 Add
               </Button>
             </Grid>
-          )}
         </Grid>
       </form>
     </ModalContainer>
