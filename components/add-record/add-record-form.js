@@ -69,9 +69,9 @@ const AddRecordForm = ({ open, onClose }) => {
             </Grid>
           )}
             <Grid item xs={12} display="flex" justifyContent="center">
-              <Loading Button loading={formSubmittedLoading} variant="contained" type="submit">
+              <LoadingButton loading={formSubmittedLoading} variant="contained" type="submit">
                 Add
-              </Button>
+              </LoadingButton>
             </Grid>
         </Grid>
       </form>
