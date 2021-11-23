@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 
 const ProfileCard = ({ name, picture, results, resultKey, index }) => {
   const result = results[resultKey];
-  const avatarHeight = 125;
+  const avatarHeight = { xs: 125, lg: 175 };
   const avatarSx = { height: avatarHeight, width: avatarHeight };
   const [show, setShow] = useState(false);
   useEffect(() => {
@@ -26,6 +26,7 @@ const ProfileCard = ({ name, picture, results, resultKey, index }) => {
             display="flex"
             justifyContent="space-between"
             alignItems="center"
+            p={{ lg: 3 }}
           >
             <Avatar alt={name} src={picture} sx={avatarSx} />
             <Box ml={3}>
