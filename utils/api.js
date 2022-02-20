@@ -22,19 +22,25 @@ Amplify.configure(awsmobile);
 const apiName = "pasirrisboysapi";
 const path = "/records";
 
-export const getTabulatedResults = async () => {
+export const getTabulatedResults = (records, selectedYear) => {
+  const tabulatedResult = { vinson: 0, junhui: 0, chimin: 0 };
+  records.forEach((record) => {
+    if (new Date(record.dateCreated).getFullYear() === selectedYear) {
+      tabulatedResult.vinson += record.vinson;
+      tabulatedResult.junhui += record.junhui;
+      tabulatedResult.chimin += record.chimin;
+    }
+  });
+  return tabulatedResult;
+};
+
+export const getRecords = async () => {
   const init = {
     headers: {},
   };
   const records = await API.get(apiName, path, init);
-  const tabulatedResult = { vinson: 0, junhui: 0, chimin: 0 };
-  records.forEach((record) => {
-    tabulatedResult.vinson += record.vinson;
-    tabulatedResult.junhui += record.junhui;
-    tabulatedResult.chimin += record.chimin;
-  });
   records.sort((a, b) => b.dateCreated - a.dateCreated);
-  return [records, tabulatedResult];
+  return records;
 };
 
 export const submitRecord = async (record) => {
