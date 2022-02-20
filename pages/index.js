@@ -3,7 +3,11 @@ import {
   Button,
   CircularProgress,
   Container,
+  FormControl,
   Grid,
+  InputLabel,
+  MenuItem,
+  Select,
   Typography,
 } from "@mui/material";
 import Head from "next/head";
@@ -19,28 +23,38 @@ import MetaDataHead from "../components/stateless/misc/meta-data-head";
 import ProfileCard from "../components/stateless/profile-cards/profile-card";
 import ViewRecordsModal from "../components/view-records/view-records-modals";
 import mainContext from "../context/main-context";
-import { getTabulatedResults } from "../utils/api";
+import { getRecords, getTabulatedResults } from "../utils/api";
 import { profiles } from "../utils/data";
 import useModal from "../utils/useModal";
+import _ from "lodash";
 
 export default function Home() {
-  const [results, setResults] = useState([]);
+  const [records, setRecords] = useState([]);
   const [tabulatedResults, setTabulatedResults] = useState();
   const [addRecordModalState, openAddRecordModal, closeAddRecordModal] =
     useModal();
   const [viewRecordsModalState, openViewRecordsModal, closeViewRecordsModal] =
     useModal();
   const [loading, setLoading] = useState(true);
+  const [selectedYear, setSelectedYear] = useState(new Date().getFullYear());
   useEffect(() => {
-    if (!loading) return;
-    getTabulatedResults()
-      .then(([results, tabulatedResults]) => {
-        setTabulatedResults(tabulatedResults);
-        setResults(results);
-      })
-      .then(() => setLoading(false));
+    if (loading) {
+      getRecords().then((res) => {
+        console.log(res);
+        setRecords(res);
+        setTabulatedResults(getTabulatedResults(res, selectedYear));
+        setLoading(false);
+      });
+    } else {
+      setTabulatedResults(getTabulatedResults(records, selectedYear));
+    }
+
     console.log("useEffect fetch results ran");
-  }, [loading]);
+  }, [records, loading, selectedYear]);
+
+  const selectYearOnChange = (event) => {
+    setSelectedYear(event.target.value);
+  };
 
   const context = { setLoading, loading };
 
@@ -57,6 +71,23 @@ export default function Home() {
               />
             </ProfileCardGridItem>
           ))}
+          <Grid item xs={6}>
+            <FormControl fullWidth>
+              <InputLabel id="demo-simple-select-label">Year</InputLabel>
+              <Select
+                value={selectedYear}
+                label="Year"
+                onChange={selectYearOnChange}
+              >
+                {_.range(2021, new Date().getFullYear() + 1).map((year) => (
+                  <MenuItem value={year} key={year}>
+                    {year}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+          </Grid>
+
           <ButtonsContainer>
             <AddButton onClick={openAddRecordModal}>Add Record</AddButton>
             <EditButton onClick={openViewRecordsModal}>View Records</EditButton>
@@ -69,7 +100,7 @@ export default function Home() {
           <ViewRecordsModal
             open={viewRecordsModalState}
             onClose={closeViewRecordsModal}
-            records={results}
+            records={records}
           />
         </ProfileCardsContainer>
       </MainContainer>

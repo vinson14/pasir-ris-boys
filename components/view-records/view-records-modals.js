@@ -15,7 +15,7 @@ const ViewRecordsModal = ({ open, onClose, records }) => {
     <ModalContainer open={open} onClose={onClose} title="Records">
       <Grid container minWidth={500}>
         {years.map((year) => (
-          <Grid item xs={12}>
+          <Grid item xs={12} key={year}>
             <Accordion>
               <AccordionSummary expandIcon={<ExpandMoreIcon />}>
                 {year}
