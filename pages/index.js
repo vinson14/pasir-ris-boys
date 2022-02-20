@@ -13,6 +13,7 @@ import {
 import Head from "next/head";
 import { useEffect, useState } from "react";
 import AddRecordForm from "../components/add-record/add-record-form";
+import SelectYearInput from "../components/misc/select-year-input";
 import AddButton from "../components/stateless/buttons/add-button";
 import EditButton from "../components/stateless/buttons/edit-button";
 import ButtonsContainer from "../components/stateless/layout/buttons-container";
@@ -26,7 +27,6 @@ import mainContext from "../context/main-context";
 import { getRecords, getTabulatedResults } from "../utils/api";
 import { profiles } from "../utils/data";
 import useModal from "../utils/useModal";
-import _ from "lodash";
 
 export default function Home() {
   const [records, setRecords] = useState([]);
@@ -71,22 +71,10 @@ export default function Home() {
               />
             </ProfileCardGridItem>
           ))}
-          <Grid item xs={6}>
-            <FormControl fullWidth>
-              <InputLabel id="demo-simple-select-label">Year</InputLabel>
-              <Select
-                value={selectedYear}
-                label="Year"
-                onChange={selectYearOnChange}
-              >
-                {_.range(2021, new Date().getFullYear() + 1).map((year) => (
-                  <MenuItem value={year} key={year}>
-                    {year}
-                  </MenuItem>
-                ))}
-              </Select>
-            </FormControl>
-          </Grid>
+          <SelectYearInput
+            selectedYear={selectedYear}
+            selectYearOnChange={selectYearOnChange}
+          />
 
           <ButtonsContainer>
             <AddButton onClick={openAddRecordModal}>Add Record</AddButton>
