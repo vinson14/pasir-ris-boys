@@ -13,7 +13,7 @@ const ViewRecordsModal = ({ open, onClose, records }) => {
   const years = _.range(2021, new Date().getFullYear() + 1);
   return (
     <ModalContainer open={open} onClose={onClose} title="Records">
-      <Grid container minWidth={500}>
+      <Grid container minWidth={300}>
         {years.map((year) => (
           <Grid item xs={12} key={year}>
             <Accordion>
