@@ -1,56 +1,75 @@
-const url = "http://127.0.0.1:8000";
-const path = "https://pr-boys.herokuapp.com/records/";
+import API from "@aws-amplify/api";
+import Amplify from "@aws-amplify/core";
+const awsmobile = {
+  aws_project_region: "us-east-1",
+  aws_dynamodb_all_tables_region: "us-east-1",
+  aws_dynamodb_table_schemas: [
+    {
+      tableName: "pasirrisboysrecords-dev",
+      region: "us-east-1",
+    },
+  ],
+  aws_cloud_logic_custom: [
+    {
+      name: "pasirrisboysapi",
+      endpoint: "https://e9ic0h44o6.execute-api.us-east-1.amazonaws.com/dev",
+      region: "us-east-1",
+    },
+  ],
+};
+
+Amplify.configure(awsmobile);
+const apiName = "pasirrisboysapi";
+const path = "/records";
 
 export const getTabulatedResults = (records, selectedYear) => {
-    console.log(records);
-    const tabulatedResult = { vinson: 0, junhui: 0, chimin: 0 };
-    records.forEach((record) => {
-        if (new Date(record.record_date).getFullYear() === selectedYear) {
-            tabulatedResult.vinson += record.vinson;
-            tabulatedResult.junhui += record.junhui;
-            tabulatedResult.chimin += record.chimin;
-        }
-    });
-    return tabulatedResult;
+  const tabulatedResult = { vinson: 0, junhui: 0, chimin: 0 };
+  records.forEach((record) => {
+    if (new Date(record.dateCreated).getFullYear() === selectedYear) {
+      tabulatedResult.vinson += record.vinson;
+      tabulatedResult.junhui += record.junhui;
+      tabulatedResult.chimin += record.chimin;
+    }
+  });
+  return tabulatedResult;
 };
 
 export const getRecords = async () => {
-    const res = await fetch(path, {
-        headers: { "Content-Type": "application/json" },
-    });
-    const records = await res.json();
-    records.sort((a, b) => b.dateCreated - a.dateCreated);
-    return records;
+  const init = {
+    headers: {},
+  };
+  const records = await API.get(apiName, path, init);
+  records.sort((a, b) => b.dateCreated - a.dateCreated);
+  return records;
 };
 
 export const submitRecord = async (record) => {
-    const today = new Date();
-    try {
-        const response = await fetch(path, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                ...record,
-                record_date: `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDate()}`,
-            }),
-        });
-        return true;
-    } catch (err) {
-        return false;
-    }
+  const init = {
+    headers: {},
+    body: record,
+  };
+  try {
+    const response = await API.post(apiName, path, init);
+    return true;
+  } catch (err) {
+    return false;
+  }
 };
 
 export const deleteRecord = async (record) => {
-    try {
-        const response = await fetch(`${path}${record.id}`, {
-            method: "DELETE",
-        });
-        return true;
-    } catch (err) {
-        return false;
-    }
+  const init = {
+    headers: {},
+  };
+  try {
+    const response = await API.del(
+      apiName,
+      `${path}/${record.dateCreated}`,
+      init
+    );
+    return true;
+  } catch (err) {
+    return false;
+  }
 };
 
 // const oneTimeAdd = async () => {
