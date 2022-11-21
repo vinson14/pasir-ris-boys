@@ -55,7 +55,7 @@ const AddRecordForm = ({ open, onClose }) => {
                                 InputLabelProps={{ shrink: true }}
                                 InputProps={{
                                     startAdornment: (
-                                        <InputAdornment position="start">points</InputAdornment>
+                                        <InputAdornment position="end">points</InputAdornment>
                                     ),
                                 }}
                             />
