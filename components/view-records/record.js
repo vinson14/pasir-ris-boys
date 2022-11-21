@@ -14,8 +14,8 @@ const Record = ({ record, onClose }) => {
         return "text.primary";
     };
     const formatValue = (value) => {
-        if (value >= 0) return `$${value}`;
-        if (value < 0) return `-$${Math.abs(value)}`;
+        if (value >= 0) return `${value} points`;
+        if (value < 0) return `-${Math.abs(value)} points`;
     };
     const [deleteLoading, setDeleteLoading] = useState(false);
     const { setLoading } = useContext(mainContext);
